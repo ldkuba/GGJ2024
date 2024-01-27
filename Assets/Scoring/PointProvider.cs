@@ -2,16 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PointProvider : MonoBehaviour
+public class PointProvider : BaseScoreProvider
 {
-    public Assets.ScoreService mScoreService;
     public System.Int64 mPointsGiven;
 
-    private void OnCollisionEnter(Collision collision)
+    protected override void ScoreFunction(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            mScoreService.AddPoints(mPointsGiven, collision.GetContact(0).point + Vector3.up);
+            SendScore(mPointsGiven, collision.GetContact(0).point);
         }
     }
 }

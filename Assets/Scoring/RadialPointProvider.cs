@@ -17,14 +17,13 @@ public static class VecExt
     }
 }
 
-public class RadialPointProvider : MonoBehaviour
+public class RadialPointProvider : BaseScoreProvider
 {
     public RadPoint[] Scores;
     public float ObjectRadius;
-    public Assets.ScoreService ScoreService;
     // Start is called before the first frame update
 
-    void OnCollisionEnter(Collision collision)
+    protected override void ScoreFunction(Collision collision)
     {
 
         Vector3 optimal_point = Vector3.left * 500;
@@ -63,7 +62,7 @@ public class RadialPointProvider : MonoBehaviour
                     break;
                 }
             }
-            ScoreService.AddPoints(awarded_points, collision.GetContact(0).point + Vector3.up);
+            SendScore(awarded_points, collision.GetContact(0).point);
         }
     }
 }
