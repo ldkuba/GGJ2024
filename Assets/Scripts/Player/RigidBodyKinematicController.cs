@@ -16,7 +16,7 @@ public class RigidBodyKinematicController : MonoBehaviour
     {
         foreach (var body in ControlledBodies)
         {
-            body.isKinematic = DefaultState;
+            body.isKinematic = State;
         }
     }
 

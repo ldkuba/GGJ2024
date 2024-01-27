@@ -93,12 +93,13 @@ public class PlayerController : MonoBehaviour
         LaunchCounts++;
         if(LaunchControls.Count == LaunchCounts && MayLaunch)
         {
-            foreach(var launcher in LaunchControls)
+            onLaunch?.Invoke();
+            foreach (var launcher in LaunchControls)
             {
                 launcher.ApplyForce();
             }
             MayLaunch = false;
-            onLaunch?.Invoke();
+
         }
     }
 }

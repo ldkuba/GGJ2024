@@ -9,7 +9,8 @@ public class LaunchController : MonoBehaviour
     public Vector3 LaunchVector;
     public Vector3 MaxForce;
     public PlayerController PlayerController;
-    public Rigidbody ForceTarget;
+    public List<Rigidbody> ForceTargets;
+    public Vector3 ForceFactor;
 
     private bool ReceivedInput;
     
@@ -23,24 +24,27 @@ public class LaunchController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float force_modifier_y = Input.GetAxis(AxisVertical) * Time.deltaTime;
+        float force_modifier_z = Input.GetAxis(AxisVertical) * Time.deltaTime;
         float force_modifier_x = Input.GetAxis(AxisHorizonal) * Time.deltaTime;
-        if (Mathf.Approximately(force_modifier_y, 0.0f) && Mathf.Approximately(force_modifier_x, 0.0f) && ReceivedInput)
+        if (Mathf.Approximately(force_modifier_z, 0.0f) && Mathf.Approximately(force_modifier_x, 0.0f) && ReceivedInput)
         {
             PlayerController.Launch();
             this.enabled = false;
         }
-        else if (!Mathf.Approximately(force_modifier_y, 0.0f) || !Mathf.Approximately(force_modifier_x, 0.0f))
+        else if (!Mathf.Approximately(force_modifier_z, 0.0f) || !Mathf.Approximately(force_modifier_x, 0.0f))
         {
             ReceivedInput = true;
-            LaunchVector.x += force_modifier_x;
-            LaunchVector.z += force_modifier_y;
-            LaunchVector.y = 3.0f;
+            LaunchVector.x += force_modifier_x * ForceFactor.x;
+            LaunchVector.z += force_modifier_z * ForceFactor.z;
+            LaunchVector.y = ForceFactor.y;
         }
     }
 
     public void ApplyForce()
     {
-        ForceTarget.AddForce(LaunchVector, ForceMode.VelocityChange);
+        foreach (var target in ForceTargets)
+        {
+            target.AddForce(LaunchVector, ForceMode.VelocityChange);
+        }
     }
 }

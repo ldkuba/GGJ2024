@@ -238,3 +238,4 @@ MonoBehaviour:
   Begin: 0
   End: 0
   mPointsGiven: 100
+  Diminisher: 50
