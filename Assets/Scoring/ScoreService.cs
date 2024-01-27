@@ -16,7 +16,7 @@ namespace Assets
         {
             Debug.Log("got " + NewPoints + " points");
             Points += NewPoints;
-            if (Prefab)
+            if (Prefab && NewPoints != 0)
             {
                 var point_score_display = GameObject.Instantiate(Prefab);
                 point_score_display.transform.position = CollisionPoint;
