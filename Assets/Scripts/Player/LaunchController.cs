@@ -82,6 +82,7 @@ public class LaunchController : MonoBehaviour
         Osci.Reinit();
         YRotationAngle.Reinit();
         XRotationAngle.Reinit();
+        DisplayItem.SetActive(true);
     }
 
     // Update is called once per frame
@@ -108,8 +109,7 @@ public class LaunchController : MonoBehaviour
             YRotationAngle.Change(force_modifier_y * ForceFactor.y);
             XRotationAngle.Change(force_modifier_x * ForceFactor.x);
             LaunchVector = Quaternion.AngleAxis(XRotationAngle.GetValue(), Vector3.up) * Quaternion.AngleAxis(YRotationAngle.GetValue(), Vector3.left) * Vector3.forward * Osci.GetValue();
-            if (DisplayItem != null)
-                GameObject.Instantiate(DisplayItem);
+            DisplayItem.SetActive(true);
         }
     }
 
