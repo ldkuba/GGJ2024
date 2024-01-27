@@ -19,7 +19,7 @@ public class PoseApplicator : MonoBehaviour
     {
         bool allow_interaction = SwapState == 0;
         SwapState = Input.GetAxisRaw(SwapAxis); //should be -1, 0, 1
-        if(allow_interaction)
+        if(allow_interaction && SwapState != 0)
         {
             index += (int)SwapState;
             if (index == -1)
