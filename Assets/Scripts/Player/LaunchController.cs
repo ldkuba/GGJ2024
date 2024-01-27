@@ -7,6 +7,7 @@ public class ValueOscilator
 {
     public float Min;
     public float Max;
+    public float InitValue;
     public float Current;
     public float OsciSpeed;
     public float CurrentOsciSpeed;
@@ -14,7 +15,7 @@ public class ValueOscilator
 
     public void Reinit()
     {
-        Current = Min;
+        Current = InitValue;
         CurrentOsciSpeed = OsciSpeed;
     }
     public void Step(float time)
