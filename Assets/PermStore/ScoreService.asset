@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1026273595220b40a50fdd99f1dbc85, type: 3}
   m_Name: ScoreService
   m_EditorClassIdentifier: 
-  Points: 26955
+  Points: 0
   Prefab: {fileID: 8987656010984667363, guid: ca525adb854d7d548804a0cedf8dfe25, type: 3}
+  Highscores: []
