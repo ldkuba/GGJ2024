@@ -466,6 +466,100 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ede656ae0dade664ea4f80f1e29d7fd9, type: 3}
+--- !u!1 &225895508
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 225895510}
+  - component: {fileID: 225895509}
+  m_Layer: 0
+  m_Name: Spot Light (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!108 &225895509
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 225895508}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 0
+  m_Shape: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_Range: 40
+  m_SpotAngle: 55
+  m_InnerSpotAngle: 2
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 1
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!4 &225895510
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 225895508}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.092296, y: 0.5609855, z: -0.70105743, w: 0.43045932}
+  m_LocalPosition: {x: -5, y: 12, z: -5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 60, y: 45, z: -90}
 --- !u!1001 &260533426
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -931,14 +1025,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 603984720}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4319943, y: -0, z: -0, w: 0.90187633}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 13.78, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1045244496}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 51.188, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
 --- !u!114 &603984724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -954,6 +1048,8 @@ MonoBehaviour:
   ToFollow: {fileID: 1211011268}
   StaticVector: {x: 0, y: 4, z: -2}
   Drag: 0.3
+  AllowIdleSpin: 1
+  IdleSpin: 5
 --- !u!1 &682300423 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4115769050475453201, guid: 98025d1cfa42d5848b9f793d0c4dc2b5, type: 3}
@@ -1017,7 +1113,7 @@ Light:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 40
-  m_SpotAngle: 25
+  m_SpotAngle: 55
   m_InnerSpotAngle: 2
   m_CookieSize: 10
   m_Shadows:
@@ -1074,7 +1170,7 @@ Transform:
   m_GameObject: {fileID: 715763741}
   serializedVersion: 2
   m_LocalRotation: {x: 0.56098557, y: 0.09229599, z: -0.43045935, w: 0.7010574}
-  m_LocalPosition: {x: 6, y: 14, z: -6}
+  m_LocalPosition: {x: 5, y: 12, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1526,7 +1622,7 @@ Light:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 40
-  m_SpotAngle: 25
+  m_SpotAngle: 55
   m_InnerSpotAngle: 2
   m_CookieSize: 10
   m_Shadows:
@@ -1583,7 +1679,7 @@ Transform:
   m_GameObject: {fileID: 1326950114}
   serializedVersion: 2
   m_LocalRotation: {x: 0.8001032, y: -0.19134168, z: 0.3314136, w: 0.46193972}
-  m_LocalPosition: {x: -6, y: 14, z: 6}
+  m_LocalPosition: {x: -5, y: 12, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1798,8 +1894,64 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6874052298236801804, guid: 2e1570e99f2fb66479d0a0abefb4291a, type: 3}
-      propertyPath: targetForMotionCheck
+      propertyPath: onLaunch.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6874052298236801804, guid: 2e1570e99f2fb66479d0a0abefb4291a, type: 3}
+      propertyPath: onEndOfRound.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6874052298236801804, guid: 2e1570e99f2fb66479d0a0abefb4291a, type: 3}
+      propertyPath: onLaunch.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6874052298236801804, guid: 2e1570e99f2fb66479d0a0abefb4291a, type: 3}
+      propertyPath: onLaunch.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
+      objectReference: {fileID: 603984724}
+    - target: {fileID: 6874052298236801804, guid: 2e1570e99f2fb66479d0a0abefb4291a, type: 3}
+      propertyPath: onEndOfRound.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6874052298236801804, guid: 2e1570e99f2fb66479d0a0abefb4291a, type: 3}
+      propertyPath: onLaunch.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6874052298236801804, guid: 2e1570e99f2fb66479d0a0abefb4291a, type: 3}
+      propertyPath: onEndOfRound.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 603984724}
+    - target: {fileID: 6874052298236801804, guid: 2e1570e99f2fb66479d0a0abefb4291a, type: 3}
+      propertyPath: onLaunch.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetIdleSpinAllowance
+      objectReference: {fileID: 0}
+    - target: {fileID: 6874052298236801804, guid: 2e1570e99f2fb66479d0a0abefb4291a, type: 3}
+      propertyPath: onEndOfRound.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6874052298236801804, guid: 2e1570e99f2fb66479d0a0abefb4291a, type: 3}
+      propertyPath: onEndOfRound.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetIdleSpinAllowance
+      objectReference: {fileID: 0}
+    - target: {fileID: 6874052298236801804, guid: 2e1570e99f2fb66479d0a0abefb4291a, type: 3}
+      propertyPath: onLaunch.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: FollowDistVec, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6874052298236801804, guid: 2e1570e99f2fb66479d0a0abefb4291a, type: 3}
+      propertyPath: onEndOfRound.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: FollowDistVec, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6874052298236801804, guid: 2e1570e99f2fb66479d0a0abefb4291a, type: 3}
+      propertyPath: onEndOfRound.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6874052298236801804, guid: 2e1570e99f2fb66479d0a0abefb4291a, type: 3}
+      propertyPath: onLaunch.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6874052298236801804, guid: 2e1570e99f2fb66479d0a0abefb4291a, type: 3}
+      propertyPath: onEndOfRound.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1894,7 +2046,7 @@ Light:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 40
-  m_SpotAngle: 25
+  m_SpotAngle: 55
   m_InnerSpotAngle: 2
   m_CookieSize: 10
   m_Shadows:
@@ -1951,7 +2103,7 @@ Transform:
   m_GameObject: {fileID: 1977360447}
   serializedVersion: 2
   m_LocalRotation: {x: 0.70105743, y: -0.43045932, z: 0.092296, w: 0.5609855}
-  m_LocalPosition: {x: 6, y: 14, z: 6}
+  m_LocalPosition: {x: 5, y: 12, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2273,6 +2425,7 @@ SceneRoots:
   - {fileID: 57978060}
   - {fileID: 121581906}
   - {fileID: 715763743}
+  - {fileID: 225895510}
   - {fileID: 1326950116}
   - {fileID: 480072859}
   - {fileID: 6667123578512491878}
