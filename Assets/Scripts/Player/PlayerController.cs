@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public float StopVelocityThreshold = 0.000001f;
     public UnityEvent onEndOfRound;
     public UnityEvent endCounterStarted;
+    public GameObject targetForMotionCheck;
     bool m_isCountingDown = false;
     float m_endOfRoundTimer = 0.0f;
     Vector3 m_lastPosition;
@@ -26,6 +27,8 @@ public class PlayerController : MonoBehaviour
     {
         onEndOfRound.AddListener(EndOfRoundCallback);
         endCounterStarted.AddListener(EndOfRoundStartCallback);
+
+        m_lastPosition = targetForMotionCheck.transform.position;
     }
 
     private void Awake()
@@ -45,7 +48,7 @@ public class PlayerController : MonoBehaviour
     {
         if(!MayLaunch) {
             // Calculate position delta and update last position
-            float positionDelta = (transform.position - m_lastPosition).magnitude / Time.deltaTime;
+            float positionDelta = (targetForMotionCheck.transform.position - m_lastPosition).magnitude / Time.deltaTime;
             m_lastPosition = transform.position;
 
             if(m_isCountingDown) {
