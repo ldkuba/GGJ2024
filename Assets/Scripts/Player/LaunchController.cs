@@ -7,6 +7,7 @@ public class ValueOscilator
 {
     public float Min;
     public float Max;
+    public float InitValue;
     public float Current;
     public float OsciSpeed;
     public float CurrentOsciSpeed;
@@ -14,7 +15,7 @@ public class ValueOscilator
 
     public void Reinit()
     {
-        Current = Min;
+        Current = InitValue;
         CurrentOsciSpeed = OsciSpeed;
     }
     public void Step(float time)
@@ -69,7 +70,7 @@ public class LaunchController : MonoBehaviour
     public PlayerController PlayerController;
     public List<Rigidbody> ForceTargets;
     public Vector2 ForceFactor;
-    public GameObject DisplayItem;
+    public LaunchArrow Arrow;
     public ValueOscilator Osci;
 
     private bool ReceivedInput;
@@ -82,7 +83,7 @@ public class LaunchController : MonoBehaviour
         Osci.Reinit();
         YRotationAngle.Reinit();
         XRotationAngle.Reinit();
-        DisplayItem.SetActive(true);
+        Arrow.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
@@ -102,6 +103,9 @@ public class LaunchController : MonoBehaviour
             Osci.Reinit();
             YRotationAngle.Reinit();
             XRotationAngle.Reinit();
+
+            Arrow.Reset();
+            Arrow.gameObject.SetActive(false);
         }
         else if (!Mathf.Approximately(force_modifier_y, 0.0f) || !Mathf.Approximately(force_modifier_x, 0.0f))
         {
@@ -109,7 +113,13 @@ public class LaunchController : MonoBehaviour
             YRotationAngle.Change(force_modifier_y * ForceFactor.y);
             XRotationAngle.Change(force_modifier_x * ForceFactor.x);
             LaunchVector = Quaternion.AngleAxis(XRotationAngle.GetValue(), Vector3.up) * Quaternion.AngleAxis(YRotationAngle.GetValue(), Vector3.left) * Vector3.forward * Osci.GetValue();
-            DisplayItem.SetActive(true);
+            
+            // Update visualization arrow
+            if(!Arrow.gameObject.activeSelf)
+                Arrow.gameObject.SetActive(true);
+
+            // Pass in normalized force 0-1
+            Arrow.SetArrow(LaunchVector, Osci.GetValue() / Osci.Max);
         }
     }
 
