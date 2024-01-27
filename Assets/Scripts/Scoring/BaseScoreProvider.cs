@@ -21,7 +21,7 @@ public abstract class BaseScoreProvider : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         ScoreFunction(collision);
-        if (UsedClip && Source)
+        if (UsedClip && Source && collision.gameObject.tag != "BlockedFromSoundPlay")
         {
             Source.PlayOneShot(UsedClip);
         }

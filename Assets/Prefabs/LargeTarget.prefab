@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4115769050475453201, guid: dd4d2381f40acd149b698b47332a5158, type: 3}
       propertyPath: m_Name
-      value: Target
+      value: LargeTarget
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -87,7 +87,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8853400665954104881}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 55baba982a592274e8b7c0f00043a8da, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -114,8 +114,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e134f123e3827a842a93aa888f365576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ScoreService: {fileID: 11400000, guid: faaf81e82698034408d05949ee06e48c, type: 2}
+  Clip: {fileID: 0}
+  Source: {fileID: 0}
+  Begin: 0
+  End: 0
   Scores:
-  - Rad: 0.1
+  - Rad: 0.12
     Points: 1000
   - Rad: 0.18
     Points: 500
@@ -128,4 +133,3 @@ MonoBehaviour:
   - Rad: 0.5
     Points: 10
   ObjectRadius: 0.5
-  ScoreService: {fileID: 11400000, guid: faaf81e82698034408d05949ee06e48c, type: 2}
