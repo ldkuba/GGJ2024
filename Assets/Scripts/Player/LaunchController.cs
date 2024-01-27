@@ -37,8 +37,6 @@ public class LaunchController : MonoBehaviour
             LaunchVector.z += force_modifier_y;
             LaunchVector.y = 3.0f;
         }
-
-
     }
 
     public void ApplyForce()
