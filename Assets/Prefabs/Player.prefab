@@ -974,11 +974,28 @@ MonoBehaviour:
   AxisVertical: Vertical
   AxisHorizonal: Horizontal
   LaunchVector: {x: 0, y: 0, z: 0}
-  MaxForce: {x: 0, y: 0, z: 0}
+  YRotationAngle:
+    Min: 0
+    Max: 90
+    InitValue: 45
+    Current: 45
+  XRotationAngle:
+    Min: -90
+    Max: 90
+    InitValue: 0
+    Current: 0
   PlayerController: {fileID: 6874052298236801804}
   ForceTargets:
   - {fileID: 4525700706533098969}
-  ForceFactor: {x: 30, y: 30, z: 30}
+  ForceFactor: {x: 30, y: 30}
+  DisplayItem: {fileID: 0}
+  Osci:
+    Min: 10
+    Max: 50
+    Current: 0
+    OsciSpeed: 10
+    CurrentOsciSpeed: 0
+    OsciFactor: 1.4
 --- !u!114 &6874052298236801804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1026,6 +1043,7 @@ MonoBehaviour:
   endCounterStarted:
     m_PersistentCalls:
       m_Calls: []
+  targetForMotionCheck: {fileID: 499352132102315164}
 --- !u!1 &3757236854551328779 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -2823696140559448884, guid: 6d5c473875e8ba0409f8a2f31ec2fe6a, type: 3}

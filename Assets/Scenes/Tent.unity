@@ -951,7 +951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96f6e89e4f44fcb4ea0964435e44ea2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ToFollow: {fileID: 0}
+  ToFollow: {fileID: 1211011268}
   StaticVector: {x: 0, y: 4, z: -2}
   Drag: 0.3
 --- !u!1 &682300423 stripped
@@ -1422,6 +1422,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1211011268 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 499352132102315164, guid: 2e1570e99f2fb66479d0a0abefb4291a, type: 3}
+  m_PrefabInstance: {fileID: 1786069460}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1255060603
 GameObject:
   m_ObjectHideFlags: 0
@@ -1792,6 +1797,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6874052298236801804, guid: 2e1570e99f2fb66479d0a0abefb4291a, type: 3}
+      propertyPath: targetForMotionCheck
+      value: 
+      objectReference: {fileID: 1211011268}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
