@@ -63,7 +63,7 @@ public class RadialPointProvider : MonoBehaviour
                     break;
                 }
             }
-            ScoreService.AddPoints(awarded_points);
+            ScoreService.AddPoints(awarded_points, collision.GetContact(0).point + Vector3.up);
         }
     }
 }

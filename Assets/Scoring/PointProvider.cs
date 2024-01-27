@@ -11,7 +11,7 @@ public class PointProvider : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            mScoreService.AddPoints(mPointsGiven);
+            mScoreService.AddPoints(mPointsGiven, collision.GetContact(0).point + Vector3.up);
         }
     }
 }
