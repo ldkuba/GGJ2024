@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -11,6 +12,8 @@ public class MainMenu : MonoBehaviour
     public Button playButton;
     public Button highscoresButton;
     public Button exitButton;
+    public Button difficultyButton;
+    public TMPro.TextMeshProUGUI difficultyText;
 
     public GameObject highscoresPanel;
     public GameObject highscoresContent;
@@ -22,6 +25,9 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!PlayerPrefs.HasKey("Difficulty"))
+            PlayerPrefs.SetString("Difficulty", "HARD");
+        difficultyText.text = PlayerPrefs.GetString("Difficulty");
         mainMenuPanel.SetActive(true);
         highscoresPanel.SetActive(false);
 
@@ -29,9 +35,17 @@ public class MainMenu : MonoBehaviour
         highscoresButton.onClick.AddListener(Highscores);
         exitButton.onClick.AddListener(Exit);
         highscoresBackButton.onClick.AddListener(HighscoresBack);
+        difficultyButton.onClick.AddListener(ChangeMode);
     }
 
-    public void Play()
+    private void ChangeMode()
+    {
+        string value_set = difficultyText.text == "HARD" ? "EASY" : "HARD";
+        difficultyText.text = value_set;
+        PlayerPrefs.SetString("Difficulty", value_set);
+    }
+
+        public void Play()
     {
         gameManager.LaunchGame();
     }

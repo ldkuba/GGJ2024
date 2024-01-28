@@ -1118,6 +1118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AxisVertical: Vertical
   AxisHorizonal: Horizontal
+  EasyAxis: Submit
   LaunchVector: {x: 0, y: 0, z: 0}
   YRotationAngle:
     Min: 0
@@ -1137,7 +1138,7 @@ MonoBehaviour:
   Osci:
     Min: 10
     Max: 50
-    InitValue: 0
+    InitValue: 10
     Current: 0
     OsciSpeed: 10
     CurrentOsciSpeed: 0
@@ -1154,6 +1155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eb9ee9abb8ca7746b9cc9d280957578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HardMode: 0
   onLaunch:
     m_PersistentCalls:
       m_Calls:

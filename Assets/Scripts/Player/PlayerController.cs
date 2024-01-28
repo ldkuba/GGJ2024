@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class PlayerController : MonoBehaviour
 {
     private PoseApplicator m_poseApplicator;
-
+    public bool HardMode;
     // Start is called before the first frame update
     [Header("Launch controls")]
     public UnityEvent onLaunch;
@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        HardMode = PlayerPrefs.GetString("Difficulty") == "HARD";
         onEndOfRound.AddListener(EndOfRoundCallback);
         endCounterStarted.AddListener(EndOfRoundStartCallback);
 
@@ -92,7 +93,12 @@ public class PlayerController : MonoBehaviour
     public void Launch()
     {
         LaunchCounts++;
-        if(LaunchControls.Count == LaunchCounts && LaunchControls.Count > 0)
+        LaunchInternal();
+    }
+
+    private void LaunchInternal()
+    {
+        if(LaunchControls.Count <= LaunchCounts && LaunchControls.Count > 0)
         {
             onLaunch?.Invoke();
             foreach (var launcher in LaunchControls)

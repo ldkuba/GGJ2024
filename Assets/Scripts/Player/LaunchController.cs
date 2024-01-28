@@ -64,6 +64,7 @@ public class LaunchController : MonoBehaviour
 {
     public string AxisVertical;
     public string AxisHorizonal;
+    public string EasyAxis;
     public Vector3 LaunchVector;
     public LimitedValue YRotationAngle;
     public LimitedValue XRotationAngle;
@@ -79,6 +80,7 @@ public class LaunchController : MonoBehaviour
     void Start()
     {
         PlayerController.AddLauncher(this);
+        Osci.Reinit();
         Reset();
     }
 
@@ -94,7 +96,37 @@ public class LaunchController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(ReceivedInput)
+        if (PlayerController.HardMode)
+            HardInput();
+        else
+            EasyInput();
+    }
+
+    public void EasyInput()
+    {
+        if (ReceivedInput)
+        {
+            Osci.Step(Time.deltaTime);
+        }
+        float force_modifier_y = Input.GetAxis(AxisVertical) * Time.deltaTime;
+        float force_modifier_x = Input.GetAxis(AxisHorizonal) * Time.deltaTime;
+        YRotationAngle.Change(force_modifier_y * ForceFactor.y);
+        XRotationAngle.Change(force_modifier_x * ForceFactor.x);
+        if (ReceivedInput && Mathf.Approximately(Input.GetAxis(EasyAxis), 0))
+        {
+            Lockdown();
+        }
+        else if(!Mathf.Approximately(Input.GetAxis(EasyAxis), 0))
+        {
+            ReceivedInput = true;
+        }
+        LaunchVector = Quaternion.AngleAxis(XRotationAngle.GetValue(), Vector3.up) * Quaternion.AngleAxis(YRotationAngle.GetValue(), Vector3.left) * Vector3.forward * Osci.GetValue();
+        Arrow.SetArrow(LaunchVector, Osci.GetValue() / Osci.Max);
+    }
+
+    public void HardInput()
+    {
+        if (ReceivedInput)
         {
             Osci.Step(Time.deltaTime);
         }
@@ -102,15 +134,7 @@ public class LaunchController : MonoBehaviour
         float force_modifier_x = Input.GetAxis(AxisHorizonal) * Time.deltaTime;
         if (Mathf.Approximately(force_modifier_y, 0.0f) && Mathf.Approximately(force_modifier_x, 0.0f) && ReceivedInput)
         {
-            PlayerController.Launch();
-            ReceivedInput = false;
-            this.enabled = false;
-            Osci.Reinit();
-            YRotationAngle.Reinit();
-            XRotationAngle.Reinit();
-
-            Arrow.Reset();
-            Arrow.gameObject.SetActive(false);
+            Lockdown();
         }
         else if (!Mathf.Approximately(force_modifier_y, 0.0f) || !Mathf.Approximately(force_modifier_x, 0.0f))
         {
@@ -118,15 +142,27 @@ public class LaunchController : MonoBehaviour
             YRotationAngle.Change(force_modifier_y * ForceFactor.y);
             XRotationAngle.Change(force_modifier_x * ForceFactor.x);
             LaunchVector = Quaternion.AngleAxis(XRotationAngle.GetValue(), Vector3.up) * Quaternion.AngleAxis(YRotationAngle.GetValue(), Vector3.left) * Vector3.forward * Osci.GetValue();
-            
+
             // Pass in normalized force 0-1
             Arrow.SetArrow(LaunchVector, Osci.GetValue() / Osci.Max);
         }
     }
-
     public void ApplyForce()
     {
         ApplyForce(LaunchVector);
+    }
+
+    private void Lockdown()
+    {
+        PlayerController.Launch();
+        ReceivedInput = false;
+        this.enabled = false;
+        Osci.Reinit();
+        YRotationAngle.Reinit();
+        XRotationAngle.Reinit();
+
+        Arrow.Reset();
+        Arrow.gameObject.SetActive(false);
     }
 
     public void ApplyForce(Vector3 Force)
