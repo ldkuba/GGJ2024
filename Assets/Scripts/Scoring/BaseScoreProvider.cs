@@ -44,10 +44,11 @@ public abstract class BaseScoreProvider : MonoBehaviour
         if (EnterColliderType(collision.gameObject.tag))
         {
             ScoreFunction(collision);
-            if (UsedClip && Source && collision.gameObject.tag != "BlockedFromSoundPlay")
-            {
-                Source.PlayOneShot(UsedClip);
-            }
+
+        }
+        if (UsedClip && Source && collision.gameObject.tag != "BlockedFromSoundPlay")
+        {
+            Source.PlayOneShot(UsedClip);
         }
     }
 
@@ -66,6 +67,8 @@ public abstract class BaseScoreProvider : MonoBehaviour
     {
         // See https://discussions.unity.com/t/how-to-play-specific-part-of-the-audio/142016
         /* Create a new audio clip */
+        if (start >= stop || stop > clip.length)
+            stop = clip.length;
         int frequency = clip.frequency;
         float timeLength = stop - start;
         int samplesLength = (int)(frequency * timeLength);

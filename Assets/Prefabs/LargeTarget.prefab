@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LargeTarget
       objectReference: {fileID: 0}
+    - target: {fileID: 4115769050475453201, guid: dd4d2381f40acd149b698b47332a5158, type: 3}
+      propertyPath: m_TagString
+      value: BlockedFromSoundPlay
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -119,6 +123,9 @@ MonoBehaviour:
   Source: {fileID: 0}
   Begin: 0
   End: 0
+  OnHit:
+    m_PersistentCalls:
+      m_Calls: []
   Scores:
   - Rad: 0.12
     Points: 1000
