@@ -118,6 +118,7 @@ GameObject:
   - component: {fileID: 728364230541635965}
   - component: {fileID: 9183750786706416070}
   - component: {fileID: 8883968971137734422}
+  - component: {fileID: 8536769405219518941}
   m_Layer: 0
   m_Name: BigButton
   m_TagString: Untagged
@@ -270,3 +271,24 @@ MonoBehaviour:
         m_CallState: 2
   mPointsGiven: 5000
   Diminisher: 5000
+--- !u!95 &8536769405219518941
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4333673329659500755}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 43390ad07e1cbd646b6922c7f673bcb9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

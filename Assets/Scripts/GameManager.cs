@@ -17,6 +17,11 @@ public class GameManager : MonoBehaviour
             {
                 // We don't want to create a new instance. One must be present
                 m_instance = GameObject.FindObjectOfType<GameManager>();
+                if(m_instance == null)
+                {
+                    m_instance = UnityEngine.SceneManagement.SceneManager.GetSceneAt(0).GetRootGameObjects()[0].AddComponent<GameManager>();
+                    m_instance.scoreService = null;
+                }
             }
 
             return m_instance;
@@ -40,7 +45,7 @@ public class GameManager : MonoBehaviour
         m_instance = this;
 
         // Load highscores
-        scoreService.LoadHighscores();
+        scoreService?.LoadHighscores();
     }
 
     public void LaunchGame() {
