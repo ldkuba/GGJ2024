@@ -38,6 +38,9 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(this.gameObject);
         m_instance = this;
+
+        // Load highscores
+        scoreService.LoadHighscores();
     }
 
     public void LaunchGame() {

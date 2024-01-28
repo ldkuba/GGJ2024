@@ -21,6 +21,12 @@ namespace Assets
             // Maybe name of player or date and time of run?
         }
 
+        [Serializable]
+        private struct SerializableHighscores
+        {
+            public List<Highscore> Highscores;
+        }
+
         // Storage for user highscores between runs
         public List<Highscore> Highscores = new List<Highscore>();
 
@@ -75,9 +81,32 @@ namespace Assets
 
         public void SaveHighscore()
         {
-            Highscores.Add(new Highscore { Points = this.TotalPoints });
+            // Add new highscore sorted
+            for(int i = 0; i < Highscores.Count; i++) {
+                if(Highscores[i].Points < this.TotalPoints) {
+                    Highscores.Insert(i, new Highscore { Points = this.TotalPoints });
+                    break;
+                }
+            }
 
             // Save to file
+            string highscoresString = JsonUtility.ToJson(new SerializableHighscores {Highscores = this.Highscores});
+            System.IO.File.WriteAllText(Application.persistentDataPath + "/highscores.json", highscoresString);
+        }
+
+        public void LoadHighscores() {
+            // Load from file
+            try {
+                string highscoresString = System.IO.File.ReadAllText(Application.persistentDataPath + "/highscores.json");
+                SerializableHighscores serialHighscores = JsonUtility.FromJson<SerializableHighscores>(highscoresString);
+                Highscores = serialHighscores.Highscores;
+
+                // Sort highscores to be safe
+                Highscores.Sort((a, b) => b.Points.CompareTo(a.Points));
+            } catch (Exception) {
+                Debug.Log("No highscores file found");
+                return;
+            }
         }
     }
 }
