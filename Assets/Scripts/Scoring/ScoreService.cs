@@ -79,14 +79,28 @@ namespace Assets
                 Debug.LogError("No level score text set");
         }
 
+        public bool IsNewHighscore() {
+            if(Highscores.Count == 0) {
+                return true;
+            }
+
+            Debug.Log("Total Points: " + TotalPoints + " Highscore: " + Highscores[0].Points);
+            return TotalPoints > Highscores[0].Points;
+        }
+
         public void SaveHighscore()
         {
             // Add new highscore sorted
+            bool inserted = false;
             for(int i = 0; i < Highscores.Count; i++) {
                 if(Highscores[i].Points < this.TotalPoints) {
                     Highscores.Insert(i, new Highscore { Points = this.TotalPoints });
+                    inserted = true;
                     break;
                 }
+            }
+            if(!inserted) {
+                Highscores.Add(new Highscore { Points = this.TotalPoints });
             }
 
             // Save to file

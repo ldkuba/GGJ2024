@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -33,7 +34,12 @@ public class JumpStatusUI : MonoBehaviour
         NextJumpText.gameObject.SetActive(false);
         EndOfRoundText.gameObject.SetActive(true);
 
-        EndOfRoundText.text = "Final Score: " + GameManager.Instance.scoreService.TotalPoints + "\nPress space to restart or escape to return to menu";
+        String message = "";
+        if(GameManager.Instance.scoreService.IsNewHighscore()) {
+            message += "New Highscore!\n";
+        }
+        message += "Final Score: " + GameManager.Instance.scoreService.TotalPoints + "\nPress space to restart or escape to return to menu";
+        EndOfRoundText.text = message;
     }
 
     void Update() {

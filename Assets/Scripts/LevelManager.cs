@@ -23,11 +23,11 @@ public class LevelManager : MonoBehaviour
 
     public void JumpEnded() {
         if(m_jumpCount >= NumJumps) {
-            // Save the highscore
-            GameManager.Instance.scoreService.SaveHighscore();
-
             // Show game over UI
             JumpUI.ShowEndOfRound();
+
+            // Save the highscore
+            GameManager.Instance.scoreService.SaveHighscore();
         }else {
             JumpUI.ShowNextJump();
         }
