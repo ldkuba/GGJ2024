@@ -1118,7 +1118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AxisVertical: Vertical
   AxisHorizonal: Horizontal
-  EasyAxis: Submit
+  EasyAxis: Launch
   LaunchVector: {x: 0, y: 0, z: 0}
   YRotationAngle:
     Min: 0

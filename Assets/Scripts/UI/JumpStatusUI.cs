@@ -27,7 +27,7 @@ public class JumpStatusUI : MonoBehaviour
         NextJumpText.gameObject.SetActive(true);
         EndOfRoundText.gameObject.SetActive(false);
 
-        NextJumpText.text = "Score: " + GameManager.Instance.scoreService.Points + "\nPress space to start next jump";
+        NextJumpText.text = "Score: " + GameManager.Instance.scoreService.Points + "\nPress Space/X/A to start next jump";
     }
 
     public void ShowEndOfRound() {
@@ -38,13 +38,13 @@ public class JumpStatusUI : MonoBehaviour
         if(GameManager.Instance.scoreService.IsNewHighscore()) {
             message += "New Highscore!\n";
         }
-        message += "Final Score: " + GameManager.Instance.scoreService.TotalPoints + "\nPress space to restart or escape to return to menu";
+        message += "Final Score: " + GameManager.Instance.scoreService.TotalPoints + "\nPress Space/X/A to restart or Escape/O/B to return to menu";
         EndOfRoundText.text = message;
     }
 
     void Update() {
         if(NextJumpText.gameObject.activeInHierarchy) {
-            if(Input.GetKeyDown(KeyCode.Space)) {
+            if(Input.GetAxis("Submit") > 0) {
                 NextJumpText.gameObject.SetActive(false);
                 LevelManager.StartNextJump();
                 return;
@@ -52,11 +52,11 @@ public class JumpStatusUI : MonoBehaviour
         }
 
         if(EndOfRoundText.gameObject.activeInHierarchy) {
-            if(Input.GetKeyDown(KeyCode.Space)) {
+            if(Input.GetAxis("Submit") > 0) {
                 EndOfRoundText.gameObject.SetActive(false);
                 LevelManager.RestartLevel();
                 return;
-            }else if(Input.GetKeyDown(KeyCode.Escape)) {
+            }else if(Input.GetAxis("Cancel") > 0) {
                 EndOfRoundText.gameObject.SetActive(false);
                 GameManager.Instance.LoadMainMenu();
                 return;
