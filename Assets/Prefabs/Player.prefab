@@ -1103,7 +1103,7 @@ MonoBehaviour:
   - {fileID: 7960501355734615691}
   - {fileID: 7259893608929569798}
   - {fileID: 5325655316331050490}
-  DefaultState: 1
+  DefaultState: 0
 --- !u!114 &7454336173386562297
 MonoBehaviour:
   m_ObjectHideFlags: 0
