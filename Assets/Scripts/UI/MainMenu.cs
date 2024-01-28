@@ -74,6 +74,8 @@ public class MainMenu : MonoBehaviour
     public void HighscoresBack() {
         mainMenuPanel.SetActive(true);
         highscoresPanel.SetActive(false);
+
+        playButton.Select();
     }
 
     public void Exit()
