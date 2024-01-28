@@ -46,6 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Arrow: {fileID: 991786419881030750}
+  ArrowSize: 0.2
+  ArrowMinLength: 0.5
+  ArrowLengthScale: 3
 --- !u!1001 &1152125583182113794
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1167,7 +1170,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   EndOfRoundDuration: 3
-  StopVelocityThreshold: 0.000001
+  StopVelocityThreshold: 0.5
   onEndOfRound:
     m_PersistentCalls:
       m_Calls:

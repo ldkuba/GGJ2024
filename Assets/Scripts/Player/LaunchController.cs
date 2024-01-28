@@ -78,8 +78,13 @@ public class LaunchController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ReceivedInput = false;
         PlayerController.AddLauncher(this);
+        Reset();
+    }
+
+    public void Reset() {
+        this.enabled = true;
+        ReceivedInput = false;
         Osci.Reinit();
         YRotationAngle.Reinit();
         XRotationAngle.Reinit();
@@ -114,10 +119,6 @@ public class LaunchController : MonoBehaviour
             XRotationAngle.Change(force_modifier_x * ForceFactor.x);
             LaunchVector = Quaternion.AngleAxis(XRotationAngle.GetValue(), Vector3.up) * Quaternion.AngleAxis(YRotationAngle.GetValue(), Vector3.left) * Vector3.forward * Osci.GetValue();
             
-            // Update visualization arrow
-            if(!Arrow.gameObject.activeSelf)
-                Arrow.gameObject.SetActive(true);
-
             // Pass in normalized force 0-1
             Arrow.SetArrow(LaunchVector, Osci.GetValue() / Osci.Max);
         }

@@ -7,6 +7,7 @@ namespace Assets
     [CreateAssetMenu(fileName = "ScoreService", menuName = "ScriptableObjects/ScoreService", order = 1)]
     public class ScoreService : ScriptableObject
     {
+        public System.Int64 TotalPoints;
         public System.Int64 Points;
         public GameObject Prefab;
 
@@ -16,7 +17,6 @@ namespace Assets
         public struct Highscore
         {
             public System.Int64 Points;
-            public System.Int64 NumJumps;
             // Whatever else we want to save, maybe per-level highscores?
             // Maybe name of player or date and time of run?
         }
@@ -27,17 +27,25 @@ namespace Assets
         private void Awake()
         {
             Points = 0;
+            TotalPoints = 0;
             Highscores.Clear();
         }
 
         public void ClearPoints() {
             Points = 0;
+            TotalPoints = 0;
+        }
+
+        public void ClearJumpPoints() {
+            Points = 0;
+            UpdateLevelScoreText(Points, TotalPoints);
         }
 
         public void AddPoints(System.Int64 NewPoints, Vector3 CollisionPoint)
         {
             Debug.Log("got " + NewPoints + " points");
             Points += NewPoints;
+            TotalPoints += NewPoints;
             if (Prefab && NewPoints != 0)
             {
                 var point_score_display = GameObject.Instantiate(Prefab);
@@ -48,21 +56,28 @@ namespace Assets
             }
 
             // Update current score level
-            UpdateLevelScoreText(Points);
+            UpdateLevelScoreText(Points, TotalPoints);
         }
 
         public void SetLevelScoreText(UI.LevelScore levelScore)
         {
             m_levelScore = levelScore;
-            m_levelScore.SetScore(Points);
+            m_levelScore.SetScore(Points, TotalPoints);
         }
 
-        private void UpdateLevelScoreText(System.Int64 NewPoints)
+        private void UpdateLevelScoreText(System.Int64 NewPoints, System.Int64 TotalPoints)
         {
             if (m_levelScore != null)
-                m_levelScore.SetScore(NewPoints);
+                m_levelScore.SetScore(NewPoints, TotalPoints);
             else
                 Debug.LogError("No level score text set");
+        }
+
+        public void SaveHighscore()
+        {
+            Highscores.Add(new Highscore { Points = this.TotalPoints });
+
+            // Save to file
         }
     }
 }

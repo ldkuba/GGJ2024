@@ -46,7 +46,10 @@ public class GameManager : MonoBehaviour
     }
 
     void ChangeLevel(String name) {
-        scoreService.ClearPoints();
         UnityEngine.SceneManagement.SceneManager.LoadScene(name);
+    }
+
+    public void LoadMainMenu() {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 }
