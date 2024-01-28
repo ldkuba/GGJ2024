@@ -20,7 +20,7 @@ ScriptedImporter:
       frameRate: 24
       interpolationMode: -1
       compressBlendShapeKeyFrames: 1
-      useLegacyClips: 0
+      useLegacyClips: 1
     generateLightmapUVs: 0
     hardAngle: 88
     angleError: 8

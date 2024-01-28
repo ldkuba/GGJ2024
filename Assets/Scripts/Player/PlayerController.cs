@@ -111,6 +111,7 @@ public class PlayerController : MonoBehaviour
 
     public void Reset() {
         m_poseApplicator.Apply();
+        Debug.Log("Resetting position");
 
         LaunchCounts = 0;
         foreach(var launcher in LaunchControls) {
