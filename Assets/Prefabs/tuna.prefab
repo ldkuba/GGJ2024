@@ -125,3 +125,4 @@ MonoBehaviour:
   Begin: 0
   End: 0
   mPointsGiven: 10000
+  Diminisher: 5000

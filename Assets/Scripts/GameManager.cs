@@ -17,6 +17,11 @@ public class GameManager : MonoBehaviour
             {
                 // We don't want to create a new instance. One must be present
                 m_instance = GameObject.FindObjectOfType<GameManager>();
+                if(m_instance == null)
+                {
+                    m_instance = UnityEngine.SceneManagement.SceneManager.GetSceneAt(0).GetRootGameObjects()[0].AddComponent<GameManager>();
+                    m_instance.scoreService = null;
+                }
             }
 
             return m_instance;
@@ -38,6 +43,9 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(this.gameObject);
         m_instance = this;
+
+        // Load highscores
+        scoreService?.LoadHighscores();
     }
 
     public void LaunchGame() {
@@ -46,7 +54,10 @@ public class GameManager : MonoBehaviour
     }
 
     void ChangeLevel(String name) {
-        scoreService.ClearPoints();
         UnityEngine.SceneManagement.SceneManager.LoadScene(name);
+    }
+
+    public void LoadMainMenu() {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 }

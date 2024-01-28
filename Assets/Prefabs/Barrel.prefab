@@ -116,6 +116,7 @@ MonoBehaviour:
   Begin: 0
   End: 0
   mPointsGiven: 10
+  Diminisher: -10
 --- !u!54 &8948385796143857255
 Rigidbody:
   m_ObjectHideFlags: 0

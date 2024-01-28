@@ -7,6 +7,7 @@ namespace Assets
     [CreateAssetMenu(fileName = "ScoreService", menuName = "ScriptableObjects/ScoreService", order = 1)]
     public class ScoreService : ScriptableObject
     {
+        public System.Int64 TotalPoints;
         public System.Int64 Points;
         public GameObject Prefab;
 
@@ -16,9 +17,14 @@ namespace Assets
         public struct Highscore
         {
             public System.Int64 Points;
-            public System.Int64 NumJumps;
             // Whatever else we want to save, maybe per-level highscores?
             // Maybe name of player or date and time of run?
+        }
+
+        [Serializable]
+        private struct SerializableHighscores
+        {
+            public List<Highscore> Highscores;
         }
 
         // Storage for user highscores between runs
@@ -27,17 +33,25 @@ namespace Assets
         private void Awake()
         {
             Points = 0;
+            TotalPoints = 0;
             Highscores.Clear();
         }
 
         public void ClearPoints() {
             Points = 0;
+            TotalPoints = 0;
+        }
+
+        public void ClearJumpPoints() {
+            Points = 0;
+            UpdateLevelScoreText(Points, TotalPoints);
         }
 
         public void AddPoints(System.Int64 NewPoints, Vector3 CollisionPoint)
         {
             Debug.Log("got " + NewPoints + " points");
             Points += NewPoints;
+            TotalPoints += NewPoints;
             if (Prefab && NewPoints != 0)
             {
                 var point_score_display = GameObject.Instantiate(Prefab);
@@ -48,21 +62,65 @@ namespace Assets
             }
 
             // Update current score level
-            UpdateLevelScoreText(Points);
+            UpdateLevelScoreText(Points, TotalPoints);
         }
 
         public void SetLevelScoreText(UI.LevelScore levelScore)
         {
             m_levelScore = levelScore;
-            m_levelScore.SetScore(Points);
+            m_levelScore.SetScore(Points, TotalPoints);
         }
 
-        private void UpdateLevelScoreText(System.Int64 NewPoints)
+        private void UpdateLevelScoreText(System.Int64 NewPoints, System.Int64 TotalPoints)
         {
             if (m_levelScore != null)
-                m_levelScore.SetScore(NewPoints);
+                m_levelScore.SetScore(NewPoints, TotalPoints);
             else
                 Debug.LogError("No level score text set");
+        }
+
+        public bool IsNewHighscore() {
+            if(Highscores.Count == 0) {
+                return true;
+            }
+
+            Debug.Log("Total Points: " + TotalPoints + " Highscore: " + Highscores[0].Points);
+            return TotalPoints > Highscores[0].Points;
+        }
+
+        public void SaveHighscore()
+        {
+            // Add new highscore sorted
+            bool inserted = false;
+            for(int i = 0; i < Highscores.Count; i++) {
+                if(Highscores[i].Points < this.TotalPoints) {
+                    Highscores.Insert(i, new Highscore { Points = this.TotalPoints });
+                    inserted = true;
+                    break;
+                }
+            }
+            if(!inserted) {
+                Highscores.Add(new Highscore { Points = this.TotalPoints });
+            }
+
+            // Save to file
+            string highscoresString = JsonUtility.ToJson(new SerializableHighscores {Highscores = this.Highscores});
+            System.IO.File.WriteAllText(Application.persistentDataPath + "/highscores.json", highscoresString);
+        }
+
+        public void LoadHighscores() {
+            // Load from file
+            try {
+                string highscoresString = System.IO.File.ReadAllText(Application.persistentDataPath + "/highscores.json");
+                SerializableHighscores serialHighscores = JsonUtility.FromJson<SerializableHighscores>(highscoresString);
+                Highscores = serialHighscores.Highscores;
+
+                // Sort highscores to be safe
+                Highscores.Sort((a, b) => b.Points.CompareTo(a.Points));
+            } catch (Exception) {
+                Debug.Log("No highscores file found");
+                return;
+            }
         }
     }
 }

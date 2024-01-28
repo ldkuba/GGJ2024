@@ -5,12 +5,14 @@ using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
+    private PoseApplicator m_poseApplicator;
+
     // Start is called before the first frame update
     [Header("Launch controls")]
     public UnityEvent onLaunch;
     private List<LaunchController> LaunchControls;
     private int LaunchCounts;
-    private bool MayLaunch;
+    private bool m_inMotion;
 
     // End of round timer
     [Header("End of round")]
@@ -29,12 +31,13 @@ public class PlayerController : MonoBehaviour
         endCounterStarted.AddListener(EndOfRoundStartCallback);
 
         m_lastPosition = targetForMotionCheck.transform.position;
+        m_inMotion = false;
     }
 
     private void Awake()
     {
         LaunchControls = new List<LaunchController>();
-        MayLaunch = false;
+        m_poseApplicator = GetComponent<PoseApplicator>();
     }
 
     void OnDestroy() {
@@ -46,10 +49,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(!MayLaunch) {
+        if(m_inMotion) {
             // Calculate position delta and update last position
             float positionDelta = (targetForMotionCheck.transform.position - m_lastPosition).magnitude / Time.deltaTime;
-            m_lastPosition = transform.position;
+            m_lastPosition = targetForMotionCheck.transform.position;
 
             if(m_isCountingDown) {
                 // If we're counting down, check if we should stop
@@ -75,30 +78,37 @@ public class PlayerController : MonoBehaviour
 
     void EndOfRoundCallback() {
         Debug.Log("End of round callback");
-        MayLaunch = true;
+        m_inMotion = false;
     }
 
     void EndOfRoundStartCallback() {
-        Debug.Log("End of round start callback");
     }
 
     public void AddLauncher(LaunchController item)
     {
         LaunchControls.Add(item);
-        MayLaunch = true;
     }
 
     public void Launch()
     {
         LaunchCounts++;
-        if(LaunchControls.Count == LaunchCounts && MayLaunch)
+        if(LaunchControls.Count == LaunchCounts && LaunchControls.Count > 0)
         {
-            foreach(var launcher in LaunchControls)
+            onLaunch?.Invoke();
+            foreach (var launcher in LaunchControls)
             {
                 launcher.ApplyForce();
             }
-            MayLaunch = false;
-            onLaunch?.Invoke();
+            m_inMotion = true;
+        }
+    }
+
+    public void Reset() {
+        m_poseApplicator.Apply();
+
+        LaunchCounts = 0;
+        foreach(var launcher in LaunchControls) {
+            launcher.Reset();
         }
     }
 }

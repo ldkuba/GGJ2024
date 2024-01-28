@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public abstract class BaseScoreProvider : MonoBehaviour
 {
     public Assets.ScoreService ScoreService;
@@ -10,26 +11,55 @@ public abstract class BaseScoreProvider : MonoBehaviour
     public AudioSource Source;
     public float Begin;
     public float End;
-
+    public UnityEngine.Events.UnityEvent OnHit;
+    private int CollisionCount;
     protected abstract void ScoreFunction(Collision collision);
+    protected bool EnterColliderType(string Tag)
+    {
+        if (Tag == "Player")
+        {
+            bool ret = CollisionCount == 0;
+            CollisionCount++;
+            return ret;
+        }
+        else return true;
+    }
+
+    protected void LeaveColliderType(string Tag)
+    {
+        if (Tag == "Player")
+        {
+            CollisionCount--;
+        }
+    }
 
     private void Start()
     {
+        CollisionCount = 0;
         if (Clip)
             UsedClip = SubClip(Clip, Begin, End);
     }
     void OnCollisionEnter(Collision collision)
     {
-        ScoreFunction(collision);
-        if (UsedClip && Source && collision.gameObject.tag != "BlockedFromSoundPlay")
+        if (EnterColliderType(collision.gameObject.tag))
         {
-            Source.PlayOneShot(UsedClip);
+            ScoreFunction(collision);
+            if (UsedClip && Source && collision.gameObject.tag != "BlockedFromSoundPlay")
+            {
+                Source.PlayOneShot(UsedClip);
+            }
         }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        LeaveColliderType(collision.gameObject.tag);
     }
 
     protected void SendScore(System.Int64 points, Vector3 Location)
     {
         ScoreService.AddPoints(points, Location + Vector3.up);
+        OnHit?.Invoke();
     }
 
     static protected AudioClip SubClip(AudioClip clip, float start, float stop)

@@ -8,18 +8,17 @@ namespace UI {
 public class LevelScore : MonoBehaviour
 {
     private TextMeshProUGUI m_text;
-    public Assets.ScoreService ScoreService;
 
     // Start is called before the first frame update
-    void Start()
+    public void Initialize()
     {
         m_text = GetComponent<TextMeshProUGUI>();
-        m_text.text = "Score: 0";
-        ScoreService.SetLevelScoreText(this);
+        m_text.text = "Score: 0\nTotal Score: 0";
+        GameManager.Instance.scoreService.SetLevelScoreText(this);
     }
 
-    public void SetScore(System.Int64 score) {
-        m_text.text = "Score: " + score.ToString();
+    public void SetScore(System.Int64 score, System.Int64 totalScore) {
+        m_text.text = "Total Score: " + totalScore.ToString() + "\nScore: " + score.ToString();
     }
 }
 }
