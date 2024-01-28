@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Assets;
 using UnityEditor;
-using UnityEditor.SearchService;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -29,7 +28,7 @@ public class GameManager : MonoBehaviour
     }
 
     // Game levels
-    public List<SceneAsset> gameLevels = new List<SceneAsset>();
+    public List<String> gameLevels = new List<String>();
 
     public ScoreService scoreService;
 
@@ -50,7 +49,7 @@ public class GameManager : MonoBehaviour
 
     public void LaunchGame() {
         // Load the first level
-        ChangeLevel(gameLevels[0].name);
+        ChangeLevel(gameLevels[0]);
     }
 
     void ChangeLevel(String name) {
