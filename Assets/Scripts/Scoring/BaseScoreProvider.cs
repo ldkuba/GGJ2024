@@ -11,6 +11,7 @@ public abstract class BaseScoreProvider : MonoBehaviour
     public AudioSource Source;
     public float Begin;
     public float End;
+    public UnityEngine.Events.UnityEvent OnHit;
     private int CollisionCount;
     protected abstract void ScoreFunction(Collision collision);
     protected bool EnterColliderType(string Tag)
@@ -58,6 +59,7 @@ public abstract class BaseScoreProvider : MonoBehaviour
     protected void SendScore(System.Int64 points, Vector3 Location)
     {
         ScoreService.AddPoints(points, Location + Vector3.up);
+        OnHit?.Invoke();
     }
 
     static protected AudioClip SubClip(AudioClip clip, float start, float stop)

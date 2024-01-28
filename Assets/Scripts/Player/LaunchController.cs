@@ -126,10 +126,19 @@ public class LaunchController : MonoBehaviour
 
     public void ApplyForce()
     {
+        ApplyForce(LaunchVector);
+    }
+
+    public void ApplyForce(Vector3 Force)
+    {
         foreach (var target in ForceTargets)
         {
-            target.AddForce(LaunchVector, ForceMode.VelocityChange);
+            target.AddForce(Force, ForceMode.VelocityChange);
         }
+    }
 
+    public void ApplyYForce(float Power)
+    {
+        ApplyForce(new Vector3(0, Power, 0));
     }
 }
